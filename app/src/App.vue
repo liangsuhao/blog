@@ -25,6 +25,6 @@ export default {
 
 <style scoped>
   .rightNav{
-    margin-left: 100px;
+    margin-left: 200px;
   }
 </style>
