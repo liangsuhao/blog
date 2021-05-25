@@ -1,30 +1,18 @@
 <template>
   <div id="app">
-    <v-leftNav />
-    <div class="rightNav">
-      <v-header />
-      <v-contentNav />
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import header from './components/header.vue'
-import leftNav from './components/leftNav'
-import contentNav from './components/contentNav'
+import user from './page/user'
+import editBlog from './page/editBlog'
 
 export default {
   name: 'App',
   components: {
-    'v-header' : header,
-    'v-leftNav' : leftNav,
-    'v-contentNav' : contentNav,
+    'v-user' : user,
+    'v-editBlog' : editBlog,
   }
 }
 </script>
-
-<style scoped>
-  .rightNav{
-    margin-left: 200px;
-  }
-</style>

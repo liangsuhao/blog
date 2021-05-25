@@ -2,6 +2,7 @@
   <div class="header">
     <div class="hide"><i class="el-icon-s-fold"></i></div>
     <span class="headerName">{{ name }}</span>
+    <span id="addContent" @click="writeContent">写文章</span>
   </div>
 </template>
 
@@ -14,6 +15,11 @@ export default {
   data() {
     return {
       name: '梁素豪的博客',
+    }
+  },
+  methods:{
+    writeContent:function(){
+      this.$router.push({path:'/editBlog'})
     }
   }
 }
@@ -41,5 +47,15 @@ export default {
   .hide{
     font-size: 27px;
     margin: 20px;
+  }
+  #addContent {
+    display: inline-block;
+    font-size: 18px;
+    position: relative;
+    right: -850px;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 1px;
+    cursor: pointer;
   }
 </style>
