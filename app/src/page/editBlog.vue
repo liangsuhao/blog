@@ -21,22 +21,22 @@ export default {
   },
   methods:{
     finishBlog: function(){
-      var data = {'data':this.$refs.editor.editorContent};
-      console.log(data)
-      axios.post('/blog-server/saveBlog',data,{
-          transformRequest:[
-                  function(data){
-                      let params = '';
-                      for(let index in data){
-                          params +=index+'='+data[index]+'&';
-                      }
-                      return params;
-                  }
-          ]
-      }).then(function(res){
-        if(res){
-          console.log(res.data)
+      var data = {content:this.$refs.editor.editorContent ,title:this.$refs.editor.title};
+      axios.post('http://localhost:3000/blog-server/saveBlog',data).then(function(res){
+        if(res.data.flag){
+          // this.$alert(res.data.msg, '标题名称', {
+          //   confirmButtonText: '确定',
+          // callback: action => {
+          //   this.$message({
+          //     type: 'info',
+          //     message: `action: ${ action }`
+          //   });
+          // }
+          // });
+          alert(res.data.msg)
         }
+      }).catch(function (error) {
+        console.log(error);
       });
     }
   },

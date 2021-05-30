@@ -36,7 +36,11 @@ export default {
                 }
             ]
         }
+    },
+    created:{
+        
     }
+
 
 }
 </script>

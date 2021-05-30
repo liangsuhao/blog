@@ -2,6 +2,7 @@
 <template>
     <div>
         <div class="abstract">请开始你的表演</div>
+        <div><el-input placeholder="请输入标题" v-model="title" ><template slot="prepend">标题：</template></el-input></div>
         <div ref="editor" style="text-align:left"></div>
         <button v-on:click="getContent">查看内容</button>
     </div>
@@ -13,7 +14,8 @@
       name: 'editor',
       data () {
         return {
-          editorContent: ''
+          editorContent: '',
+          title:'',
         }
       },
       methods: {
