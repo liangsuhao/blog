@@ -13,7 +13,7 @@ export class tblBlogList {
   @Column({ type: 'text', default : null })
   abstract: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text'})
   title: string;
 
   @Column({ type:'text' ,default: null})

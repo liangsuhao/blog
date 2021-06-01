@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Editor ref="editor"></Editor>
+    <Editor ref="editor" v-bind:title="title" v-bind:editorContent="editorContent"></Editor>
     <el-button class="finishBlog" @click="finishBlog">完成编辑</el-button>
   </div>
 </template>
@@ -17,22 +17,16 @@ export default {
   data(){
     return {
       editor : null,
+      id : null,
+      title : "",
+      editorContent : "",
     }
   },
   methods:{
     finishBlog: function(){
-      var data = {content:this.$refs.editor.editorContent ,title:this.$refs.editor.title};
+      var data = {id:this.id,content:this.$refs.editor.editorContent ,title:this.$refs.editor.title};
       axios.post('http://localhost:3000/blog-server/saveBlog',data).then(function(res){
         if(res.data.flag){
-          // this.$alert(res.data.msg, '标题名称', {
-          //   confirmButtonText: '确定',
-          // callback: action => {
-          //   this.$message({
-          //     type: 'info',
-          //     message: `action: ${ action }`
-          //   });
-          // }
-          // });
           alert(res.data.msg)
         }
       }).catch(function (error) {
@@ -41,6 +35,18 @@ export default {
     }
   },
   created:function () {
+    this.id = this.$route.query.id;
+    if(this.id){
+      var params = {id:this.id}
+      axios.post('http://localhost:3000/blog-server/getOne',params).then((res)=>{
+        if(res.data.flag){
+          this.title = res.data.data.title;
+          this.editorContent = res.data.data.content;
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="leftNav">
         <div class="photo">
-            <img src="" alt="头像">
+            <img src="../assets/photo1.jpeg" alt="头像" style="width:190px;height:auto"  @click="goHome">
             <div class="name">{{name}}</div>
             <div class="abstract">{{abstract}}</div>
         </div>
@@ -55,6 +55,11 @@ export default {
                 label: 'label'
             }
         }
+    },
+    methods: {
+        goHome: function(){
+            this.$router.push({path:"/contentNav"});
+        }
     }
 
 }
@@ -69,7 +74,7 @@ export default {
         width: 200px;
     }
     .photo{
-        background: url(./../assets/logo.png);
+        /* background: url(./../assets/logo.png); */
         width: 200px;
         height: 200px;
     }

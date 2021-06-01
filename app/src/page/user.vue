@@ -3,7 +3,8 @@
     <v-leftNav />
       <div class="rightNav">
         <v-header />
-        <v-contentNav />
+        <router-view></router-view>
+       
       </div>
   </div>
 </template>
