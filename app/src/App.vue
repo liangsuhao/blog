@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-user></v-user>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -16,3 +16,10 @@ export default {
   }
 }
 </script>
+
+<style lang="less">
+  body{
+    margin: 0;
+    padding: 0;
+  }
+</style>

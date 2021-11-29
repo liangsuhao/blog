@@ -58,7 +58,7 @@ export default {
     },
     methods: {
         goHome: function(){
-            this.$router.push({path:"/contentNav"});
+            this.$router.push({path:"/user/contentNav"});
         }
     }
 

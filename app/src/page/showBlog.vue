@@ -37,7 +37,7 @@ export default {
     },
 
     editBlog: function(){
-      this.$router.push({path:"/editBlog?id="+this.id});
+      this.$router.push({path:"/user/editBlog?id="+this.id});
     }
   },
   created:function () {

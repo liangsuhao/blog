@@ -19,7 +19,7 @@ export default {
   },
   methods:{
     writeContent:function(){
-      this.$router.push({path:'/editBlog'})
+      this.$router.push({path:'/user/editBlog'})
     }
   }
 }
