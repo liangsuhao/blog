@@ -25,7 +25,6 @@ export class BlogServerService {
   }
 
   async saveBlog(params): Promise<object> {
-    console.log(params);
     if(params.id){
     const user = await getRepository(tblBlogList)
     .createQueryBuilder("tblBlogList")

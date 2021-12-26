@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user';
 import { tblBlogList } from './entity/tblBlogList';
 import { BlogServerModule } from './blog-server/blog-server.module';
+import { LoginController } from './login/login.controller';
+import { LoginModule } from './login/login.module';
 
 @Module({
   imports: [
@@ -24,6 +26,7 @@ import { BlogServerModule } from './blog-server/blog-server.module';
       charset: 'utf8mb4'
     }),
     BlogServerModule,
+    LoginModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -8,7 +8,7 @@ import querystring from 'querystring';
 const signApi = {
   //登录
   loginin(params){
-    return axios.post('/signin/',querystring.stringify(params));
+    return axios.post('http://localhost:3000/login/loginin',querystring.stringify(params));
   },
   //注册
   signup(params){

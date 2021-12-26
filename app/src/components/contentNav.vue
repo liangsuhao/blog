@@ -27,9 +27,7 @@ export default {
         // axios.post('http://localhost:3000/blog-server/getBlogs',params).then((res) => {
         this.$api.blogApi.getBlogs(params).then((res) => {
             if(res.data.flag){
-                console.log(res);
                 this.contentData = res.data.data;
-                console.log(this.contentData)
                 this.contentData.forEach(element => {
                     let date = new Date(element.logTime*1000 + 8 * 3600 * 1000);
                     element.logTime =  date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '.');
