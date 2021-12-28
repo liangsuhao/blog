@@ -45,7 +45,12 @@
         this.$refs['loginForm'].validate((valid) => {
           if (valid) {
             this.$api.loginApi.loginin(this.loginForm).then((arr)=>{
-              alert(arr.msg);
+              console.log(arr)
+              if(arr.data) {
+                this.$store.dispatch('login/saveToken',arr.data.token);
+                this.$message("登陆成功，即将跳转到个人主页");
+                this.$router.push({path:'/user/contentNav'})
+              }
             })
           } else {
             console.log('error submit!!');

@@ -7,9 +7,9 @@ let vueobj = new Vue();
 
 const toSignin = function (msg) {
 
-  var message = msg ? msg : "session过期，即将前往登录页面";
+  var message = msg ? msg : "token过期，即将前往登录页面";
   vueobj.$message.error({showClose: true, message: message, duration: 3000, onClose: function () {
-      router.replace({path: '/signin', query: {redirect: router.currentRoute.fullPath}
+      router.replace({path: '/login', query: {redirect: router.currentRoute.fullPath}
       });
   }});
 }
@@ -99,6 +99,18 @@ instance.interceptors.response.use(
     }
   }
 );
+
+//设置axios请求拦截，在请求头中带上token
+instance.interceptors.request.use(
+  config => {
+    if (localStorage.getItem("token")) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+      config.headers.Authorization = `token ${localStorage.getItem("token")}`;
+    }
+    return config;
+  },
+  err => {
+    return Promise.reject(err);
+  });
 
 export default instance;
 

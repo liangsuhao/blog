@@ -14,7 +14,7 @@ export default {
   },
   data() {
     return {
-      name: '梁素豪的博客',
+      name: '测试',
     }
   },
   methods:{
