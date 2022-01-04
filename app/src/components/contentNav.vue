@@ -23,7 +23,7 @@ export default {
         }
     },
     created:function(){
-        var params = {userId : 1};
+        var params = {};
         // axios.post('http://localhost:3000/blog-server/getBlogs',params).then((res) => {
         this.$api.blogApi.getBlogs(params).then((res) => {
             if(res.data.flag){

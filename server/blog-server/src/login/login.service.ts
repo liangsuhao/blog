@@ -27,7 +27,6 @@ export class LoginService {
 
     async validate(username: string, password: string): Promise<User> {
         const user = await this.findUser(username);
-        console.log(user)
         if (user && user.password === password) {
           const { password, ...userInfo } = user;
           return user;
@@ -43,7 +42,7 @@ export class LoginService {
     async login(user: User): Promise<TokenEntity> {
         const { id, userName } = user;
         return {
-            token: this.jwtService.sign({ userName, sub: id }),
+            token: this.jwtService.sign({ username:userName, sub: id }),
         };
     }
 }

@@ -7,14 +7,16 @@ import { LoginController } from './login.controller';
 import { LoginService } from './login.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtContants } from './jwt.contants';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
-  providers: [LoginService, LocalStrategy],
+  providers: [LoginService, LocalStrategy,JwtStrategy],
   controllers: [LoginController],
   imports: [
     PassportModule,TypeOrmModule.forFeature([User]),
     JwtModule.register({
       secret: jwtContants.secret,
+      signOptions: { expiresIn: '2 days' },
     }),
   ]
 })

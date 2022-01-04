@@ -104,7 +104,7 @@ instance.interceptors.response.use(
 instance.interceptors.request.use(
   config => {
     if (localStorage.getItem("token")) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
-      config.headers.Authorization = `token ${localStorage.getItem("token")}`;
+      config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
     }
     return config;
   },

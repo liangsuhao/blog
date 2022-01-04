@@ -24,12 +24,14 @@ export default {
   },
   methods:{
     finishBlog: function(){
-      var data = {id:this.id,content:this.$refs.editor.editorContent ,title:this.$refs.editor.title};
-      axios.post('http://localhost:3000/blog-server/saveBlog',data).then(function(res){
+      var data = {id:this.id,content:this.$refs.editor.getHtml() ,title:this.$refs.editor.title};
+      // axios.post('http://localhost:3000/blog-server/saveBlog',data).then(function(res){
+      this.$api.blogApi.saveBlog(data).then(function(res){
         if(res.data.flag){
-          alert(res.data.msg)
+          this.$message({message:res.data.msg,type:'success'})
         }
       }).catch(function (error) {
+        this.$message.error("失败")
         console.log(error);
       });
     }

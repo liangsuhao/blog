@@ -10,7 +10,7 @@ const blogApi = {
     return axios.post('http://localhost:3000/blog-server/getOne',querystring.stringify(params));
   },
   saveBlog(params){
-    return axios.post('http://localhost:3000/blog-server/saveBlog',querystring.stringify(params));
+    return axios.post('http://localhost:3000/blog-server/saveBlog',params);
   },
   getBlogs(params){
     return axios.post('http://localhost:3000/blog-server/getBlogs',querystring.stringify(params));

@@ -16,6 +16,7 @@
         return {
           editorContent: '',
           title:'',
+          editor
         }
       },
       props: {
@@ -24,20 +25,28 @@
       },
       methods: {
         getContent: function () {
-            alert(this.editorContent)
+            alert(this.getHtml())
+        },
+        getHtml () {
+          // 得到文本内容
+          return this.editor.txt.html()
+        },
+        setHtml(txt) {
+          this.editor.txt.html(txt)
         }
       },
       watch: {
-        editorContent: function (newContent, oldContent) {
-          editor.txt.html(newContent);
-        }
+        // editorContent: function (newContent, oldContent) {
+        //   editor.txt.html(newContent);
+        // }
       },
       mounted() {
         var editor = new E(this.$refs.editor)
-        editor.config.onchange = (html) => {
-          this.editorContent = html
+        this.editor = editor;
+        this.editor.create();
+        if(props.editorContent) {
+          this.setHtml(props.editorContent);
         }
-        editor.create()
       }
     }
 </script>

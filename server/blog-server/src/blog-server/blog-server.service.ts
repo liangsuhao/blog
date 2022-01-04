@@ -68,7 +68,7 @@ export class BlogServerService {
   async getBlogList(params): Promise<object> {
     const blogList = await getRepository(tblBlogList)
     .createQueryBuilder("tblBlogList")
-    .where("userId = :userId", { userId: params.userId } )
+    .where("userId = :userId", { userId: params.user.userId } )
     .getMany();
      var result = {
       'flag' : true,
