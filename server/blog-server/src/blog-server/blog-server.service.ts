@@ -25,6 +25,7 @@ export class BlogServerService {
   }
 
   async saveBlog(params): Promise<object> {
+    let insertId = '';
     if(params.id){
     const user = await getRepository(tblBlogList)
     .createQueryBuilder("tblBlogList")
@@ -41,6 +42,7 @@ export class BlogServerService {
       )
       .where("id=:id", { id:params.id})
       .execute();
+      insertId = params.id;
     } else {
     const user = await getRepository(tblBlogList)
     .createQueryBuilder("tblBlogList")
@@ -56,11 +58,12 @@ export class BlogServerService {
         show:params.show,
         classified:params.classified },
       ]).execute();
+      insertId = user.raw.insertId;
     }
-
     var result = {
       flag: true,
       msg: '保存成功',
+      id: insertId,
     }
     return result;
   }

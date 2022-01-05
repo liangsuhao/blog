@@ -16,7 +16,6 @@ export default {
   },
   data(){
     return {
-      editor : null,
       id : null,
       title : "",
       editorContent : "",
@@ -26,9 +25,10 @@ export default {
     finishBlog: function(){
       var data = {id:this.id,content:this.$refs.editor.getHtml() ,title:this.$refs.editor.title};
       // axios.post('http://localhost:3000/blog-server/saveBlog',data).then(function(res){
-      this.$api.blogApi.saveBlog(data).then(function(res){
+      this.$api.blogApi.saveBlog(data).then((res) => {
         if(res.data.flag){
           this.$message({message:res.data.msg,type:'success'})
+          this.$route.push({path:'/user/showBlog?id='+res.data.id})
         }
       }).catch(function (error) {
         this.$message.error("失败")

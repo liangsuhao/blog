@@ -23,27 +23,36 @@ export default {
         }
     },
     created:function(){
-        var params = {};
-        // axios.post('http://localhost:3000/blog-server/getBlogs',params).then((res) => {
-        this.$api.blogApi.getBlogs(params).then((res) => {
-            if(res.data.flag){
-                this.contentData = res.data.data;
-                this.contentData.forEach(element => {
-                    let date = new Date(element.logTime*1000 + 8 * 3600 * 1000);
-                    element.logTime =  date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '.');
-                });
-            }
-        }).catch((e)=>{console.log(e)})
+        this.getAllBlogs();
     },
     methods: {
+
+        getAllBlogs: function() {
+            var params = {};
+            this.$api.blogApi.getBlogs(params).then((res) => {
+                if(res.data.flag){
+                    this.contentData = res.data.data;
+                    this.contentData.forEach(element => {
+                        let date = new Date(element.logTime*1000 + 8 * 3600 * 1000);
+                        element.logTime =  date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '.');
+                    });
+                }
+            }).catch((e)=>{console.log(e)})
+        },
+
         chooseBlog: function(id){
             this.$router.push({path:'/user/showBlog?id='+id})
         },
+
         delBlog: function(id) {
             var params = {id : id};
-            axios.post('http://localhost:3000/blog-server/delBlog',params).then((res) => {
+            // axios.post('http://localhost:3000/blog-server/delBlog',params).then((res) => {
+            this.$api.blogApi.delBlog(params).then((res)=>{
                 if(res.data.flag){
-                    alert(res.data.msg);
+                    this.$message({message:res.data.msg, type:'success'});
+                    this.getAllBlogs();
+                } else {
+                    this.$message.error(res.data.msg);
                 }
             })
         }

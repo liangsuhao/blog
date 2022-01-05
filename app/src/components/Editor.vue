@@ -16,7 +16,7 @@
         return {
           editorContent: '',
           title:'',
-          editor
+          editor: null,
         }
       },
       props: {
@@ -44,7 +44,7 @@
         var editor = new E(this.$refs.editor)
         this.editor = editor;
         this.editor.create();
-        if(props.editorContent) {
+        if(props && props.editorContent) {
           this.setHtml(props.editorContent);
         }
       }
