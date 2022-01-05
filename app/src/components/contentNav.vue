@@ -4,8 +4,7 @@
             <div class="contentItem" @click="chooseBlog(item.id)">
                 <div class="contentInfo">
                     <div class="blogTitle">{{item.title}} </div>
-                    <div class="blogAbstract">摘要：{{item.abstract}}</div>
-                    <div class="blogTime">博客时间：{{item.logTime}} &nbsp; {{item.tag}}</div>
+                    <div class="blogTime">书写时间:{{item.logTime}} &nbsp; {{item.tag}}</div>
                 </div>
                 <div class="delBlog" @click.stop="delBlog(item.id)"><i class="el-icon-delete"></i></div>
             </div>
@@ -71,6 +70,7 @@ export default {
         padding-left: 10px;
         margin: 10px;
         cursor: pointer;
+        border-radius: 10px;
     }
 
     .blogTitle {

@@ -28,7 +28,7 @@ export default {
       this.$api.blogApi.saveBlog(data).then((res) => {
         if(res.data.flag){
           this.$message({message:res.data.msg,type:'success'})
-          this.$route.push({path:'/user/showBlog?id='+res.data.id})
+          this.$router.push({path:'/user/showBlog?id='+res.data.id})
         }
       }).catch(function (error) {
         this.$message.error("失败")

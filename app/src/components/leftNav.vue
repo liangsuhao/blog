@@ -1,15 +1,34 @@
 <template>
     <div class="leftNav">
-        <div class="photo">
+        <!-- <div class="photo">
             <img src="../assets/photo1.jpeg" alt="头像" style="width:190px;height:auto"  @click="goHome">
             <div class="name">{{name}}</div>
             <div class="abstract">{{abstract}}</div>
-        </div>
-        <div class="info">
-            <div class="operate">
-                <el-tree style="background:inherit;font-size:30px" :data="options" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
-            </div>
-        </div>
+        </div> -->
+        <el-menu
+            style="height:100%"
+            default-active="2"
+            :collapse="isCollapse"
+            class="el-menu-vertical-demo"
+            @open="handleOpen"
+            @close="handleClose">
+            <el-menu-item index="1">
+                <i class="el-icon-location"></i>
+                <span>博客主页</span>
+            </el-menu-item>
+            <el-menu-item index="2">
+                <i class="el-icon-menu"></i>
+                <span slot="title">自我介绍</span>
+            </el-menu-item>
+            <el-menu-item index="3" disabled>
+                <i class="el-icon-document"></i>
+                <span slot="title">导航三</span>
+            </el-menu-item>
+            <el-menu-item index="4" disabled>
+                <i class="el-icon-setting"></i>
+                <span slot="title">导航四</span>
+            </el-menu-item>
+        </el-menu>
     </div>
 </template>
 
@@ -69,7 +88,7 @@ export default {
     .leftNav{
         float: left;
         widows: 200px;
-        background: rgb(211, 211, 195);
+        /* background: rgb(211, 211, 195); */
         height: 100vh;
         width: 200px;
     }

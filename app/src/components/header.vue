@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="hide"><i class="el-icon-s-fold"></i></div>
+    <!-- <div class="hide"><i class="el-icon-s-fold"></i></div> -->
     <span class="headerName">{{ name }}</span>
     <span id="addContent" @click="writeContent">写文章</span>
   </div>
@@ -14,7 +14,7 @@ export default {
   },
   data() {
     return {
-      name: '测试',
+      name: '早睡早起方能养生',
     }
   },
   methods:{
@@ -31,13 +31,12 @@ export default {
     display: flex;
     width: 100%;
     height: 60px;
-    background-color: #795548;
+    background-color: #c5def7;
     align-items: center;
   }
 
   .header span {
     font-size: 24px;
-    color: white;
   }
   .headerName{
     display: inline-block;
@@ -51,8 +50,8 @@ export default {
   #addContent {
     display: inline-block;
     font-size: 18px;
-    position: relative;
-    right: -850px;
+    position: fixed;
+    right: 50px;
     border: 1px solid;
     border-radius: 10px;
     padding: 1px;
