@@ -33,7 +33,40 @@
         },
         setHtml(txt) {
           this.editor.txt.html(txt)
-        }
+        },
+        getRichText() {
+          this.editor.config.showLinkImg = false; //隐藏网络图片上传
+          this.editor.config.uploadImgShowBase64 = true; //图片以base64形式保存
+          this.editor.config.uploadFileName = "file";
+    
+          this.editor.config.customUploadImg = (files, insert) => {
+            let fileName = "";
+            for (let i = 0; i < files.length; i++) {
+              fileName = files[i].name + "," + fileName;
+            }
+            let obj = {
+              fileName: fileName,
+            };
+            // 获取图片链接
+            this.$api.blogApi.getImgLink(obj)
+              .then((res) => {
+                const flag = res.data.flag;
+                if (flag) {
+                  this.imgList = res.data.content;
+                  for(let i=0; i<this.imgList.length;i++){
+                    //图片回显
+                    insert(this.imgList[i])
+                  };
+                } else {
+                  this.$messsage.error(res.data.message);
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          };
+          this.editor.create(); // 创建富文本实例
+        },
       },
       watch: {
         // editorContent: function (newContent, oldContent) {
@@ -43,7 +76,7 @@
       mounted() {
         var editor = new E(this.$refs.editor)
         this.editor = editor;
-        this.editor.create();
+        this.getRichText();
         if(props && props.editorContent) {
           this.setHtml(props.editorContent);
         }

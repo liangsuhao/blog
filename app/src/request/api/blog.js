@@ -17,6 +17,9 @@ const blogApi = {
   },
   delBlog(params){
     return axios.post('http://localhost:3000/blog-server/delBlog',querystring.stringify(params));
+  },
+  getImgLink(params){
+    return axios.post('http://localhost:3000/blog-server/uploadImg',querystring.stringify(params));
   }
 };
 
