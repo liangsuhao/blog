@@ -10,9 +10,8 @@
             default-active="2"
             :collapse="isCollapse"
             class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose">
-            <el-menu-item index="1">
+            @select="handleSel">
+            <el-menu-item index="contentNav">
                 <i class="el-icon-location"></i>
                 <span>博客主页</span>
             </el-menu-item>
@@ -78,6 +77,11 @@ export default {
     methods: {
         goHome: function(){
             this.$router.push({path:"/user/contentNav"});
+        },
+        handleSel: function(key) {
+          if(key === 'contentNav') {
+            this.$router.push({path:"/user/contentNav"});
+          }
         }
     }
 

@@ -40,25 +40,21 @@
           this.editor.config.uploadFileName = "file";
     
           this.editor.config.customUploadImg = (files, insert) => {
-            let fileName = "";
-            for (let i = 0; i < files.length; i++) {
-              fileName = files[i].name + "," + fileName;
-            }
-            let obj = {
-              fileName: fileName,
-            };
+            const formData = new FormData();
+            formData.append('img',files[0]);
             // 获取图片链接
-            this.$api.blogApi.getImgLink(obj)
+            this.$api.blogApi.getImgLink(formData)
               .then((res) => {
+                console.log(res)
                 const flag = res.data.flag;
                 if (flag) {
-                  this.imgList = res.data.content;
-                  for(let i=0; i<this.imgList.length;i++){
-                    //图片回显
-                    insert(this.imgList[i])
-                  };
+                  // this.imgList = res.data.content;
+                  // for(let i=0; i<this.imgList.length;i++){
+                  //   //图片回显
+                    insert(res.data.content)
+                  // };
                 } else {
-                  this.$messsage.error(res.data.message);
+                  this.$messsage.error(res.data.msg);
                 }
               })
               .catch((err) => {

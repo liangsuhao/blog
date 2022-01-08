@@ -19,8 +19,12 @@ const blogApi = {
     return axios.post('http://localhost:3000/blog-server/delBlog',querystring.stringify(params));
   },
   getImgLink(params){
-    return axios.post('http://localhost:3000/blog-server/uploadImg',querystring.stringify(params));
-  }
+    return axios.post('http://localhost:3000/blog-server/uploadImg',params,{
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+  },
 };
 
 export default blogApi;

@@ -106,4 +106,14 @@ export class BlogServerService {
     }
     return result;
   }
+
+  async uploadImg(params): Promise<object> {
+    
+
+    var result = {
+      flag: true,
+      msg: '上传成功',
+    }
+    return result;
+  }
 }
