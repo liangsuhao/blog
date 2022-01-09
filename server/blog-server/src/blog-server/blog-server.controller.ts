@@ -11,7 +11,7 @@ import { createWriteStream } from 'fs';
 @Controller('blog-server')
 export class BlogServerController {
   constructor(private readonly BlogServerService: BlogServerService) {}
-  url = 'http://localhost:3000/upload/';
+  url = '/upload/';
 
   @UseGuards(AuthGuard('jwt'))
   @Post("saveBlog")
