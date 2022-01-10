@@ -13,17 +13,19 @@ import { LoginModule } from './login/login.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '123456',
-      database: 'blog',
+      type: 'sqlite',
+      database: './test.db',
+      // type: 'mysql',
+      // host: 'localhost',
+      // port: 3306,
+      // username: 'root',
+      // password: '123456',
+      // database: 'blog',
       entities: [User,tblBlogList],
       synchronize: true,
       autoLoadEntities: true,
-      timezone: 'UTC',
-      charset: 'utf8mb4'
+      // timezone: 'UTC',
+      // charset: 'utf8mb4'
     }),
     BlogServerModule,
     LoginModule,

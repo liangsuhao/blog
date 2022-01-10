@@ -21,17 +21,11 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
-                type: 'mysql',
-                host: 'localhost',
-                port: 3306,
-                username: 'root',
-                password: '123456',
-                database: 'blog',
+                type: 'sqlite',
+                database: './test.db',
                 entities: [user_1.User, tblBlogList_1.tblBlogList],
                 synchronize: true,
                 autoLoadEntities: true,
-                timezone: 'UTC',
-                charset: 'utf8mb4'
             }),
             blog_server_module_1.BlogServerModule,
             login_module_1.LoginModule,

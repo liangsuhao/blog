@@ -58,7 +58,7 @@ export class BlogServerService {
         show:params.show,
         classified:params.classified },
       ]).execute();
-      insertId = user.raw.insertId;
+      insertId = user.raw;
     }
     var result = {
       flag: true,

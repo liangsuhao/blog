@@ -64,7 +64,8 @@ let BlogServerService = class BlogServerService {
                     show: params.show,
                     classified: params.classified },
             ]).execute();
-            insertId = user.raw.insertId;
+            console.log(user);
+            insertId = user.raw;
         }
         var result = {
             flag: true,
