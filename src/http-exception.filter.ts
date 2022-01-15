@@ -10,7 +10,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
 
     if(status == 404) {
-        request.res.redirect('/index.html');
+        request.res.sendFile('app/dist/index.html', {
+          root: '.'
+        });
         return;
     }
 

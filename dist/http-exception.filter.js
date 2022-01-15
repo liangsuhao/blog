@@ -15,7 +15,9 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const request = ctx.getRequest();
         const status = exception.getStatus();
         if (status == 404) {
-            request.res.redirect('http://localhost:3000/index.html');
+            request.res.sendFile('app/dist/index.html', {
+                root: '.'
+            });
             return;
         }
         response
