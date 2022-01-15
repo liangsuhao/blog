@@ -13,6 +13,7 @@ const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_1 = require("./entity/user");
 const tblBlogList_1 = require("./entity/tblBlogList");
+const tblImage_1 = require("./entity/tblImage");
 const blog_server_module_1 = require("./blog-server/blog-server.module");
 const login_module_1 = require("./login/login.module");
 let AppModule = class AppModule {
@@ -21,10 +22,13 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
-                type: 'sqlite',
-                database: './test.db',
-                entities: [user_1.User, tblBlogList_1.tblBlogList],
+                type: 'postgres',
+                url: process.env.DATABASE_URL,
+                entities: [user_1.User, tblBlogList_1.tblBlogList, tblImage_1.tblImages],
                 synchronize: true,
+                ssl: {
+                    rejectUnauthorized: false
+                },
                 autoLoadEntities: true,
             }),
             blog_server_module_1.BlogServerModule,

@@ -13,12 +13,13 @@ const tblBlogList_1 = require("../entity/tblBlogList");
 const blog_server_controller_1 = require("./blog-server.controller");
 const blog_server_service_1 = require("./blog-server.service");
 const login_module_1 = require("../login/login.module");
+const tblImage_1 = require("../entity/tblImage");
 let BlogServerModule = class BlogServerModule {
 };
 BlogServerModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([tblBlogList_1.tblBlogList]),
+            typeorm_1.TypeOrmModule.forFeature([tblBlogList_1.tblBlogList, tblImage_1.tblImages]),
             login_module_1.LoginModule,
         ],
         providers: [blog_server_service_1.BlogServerService],

@@ -17,9 +17,7 @@ const common_1 = require("@nestjs/common");
 const blog_server_service_1 = require("./blog-server.service");
 const passport_1 = require("@nestjs/passport");
 const platform_express_1 = require("@nestjs/platform-express");
-const path_1 = require("path");
-const moment = require("moment");
-const fs_1 = require("fs");
+const stream_1 = require("stream");
 let BlogServerController = class BlogServerController {
     constructor(BlogServerService) {
         this.BlogServerService = BlogServerService;
@@ -44,13 +42,16 @@ let BlogServerController = class BlogServerController {
         return this.BlogServerService.delBlog(body);
     }
     async uploadImg(file, req) {
-        let fileName = req.user.userId.toString() + moment().format('YYYYMMDDHHmmss');
-        const extra = file.originalname.split('.')[1];
-        fileName = fileName + '.' + extra;
-        const writeImage = (0, fs_1.createWriteStream)((0, path_1.join)(__dirname, '..', '../public/upload', `${fileName}`));
-        writeImage.write(file.buffer);
-        const content = this.url + fileName;
-        return { 'flag': true, 'msg': '成功', 'content': content };
+        const id = await this.BlogServerService.saveImage({ image: file.buffer });
+        const content = "/blog-server/images/" + id;
+        return { flag: true, msg: '成功', content: content };
+    }
+    async getImages(id, res) {
+        const image = await this.BlogServerService.getImage(id);
+        const stream = new stream_1.Readable();
+        stream.push(image);
+        stream.push(null);
+        stream.pipe(res);
     }
 };
 __decorate([
@@ -93,6 +94,15 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], BlogServerController.prototype, "uploadImg", null);
+__decorate([
+    (0, common_1.Get)('images/:id'),
+    (0, common_1.Header)('Content-Type', 'image/png'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], BlogServerController.prototype, "getImages", null);
 BlogServerController = __decorate([
     (0, common_1.Controller)('blog-server'),
     __metadata("design:paramtypes", [blog_server_service_1.BlogServerService])

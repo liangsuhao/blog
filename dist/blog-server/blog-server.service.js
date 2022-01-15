@@ -16,11 +16,12 @@ exports.BlogServerService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const tblBlogList_1 = require("../entity/tblBlogList");
+const tblImage_1 = require("../entity/tblImage");
 const typeorm_2 = require("typeorm");
-const typeorm_3 = require("typeorm");
 let BlogServerService = class BlogServerService {
-    constructor(blogRepository) {
+    constructor(blogRepository, imageRepository) {
         this.blogRepository = blogRepository;
+        this.imageRepository = imageRepository;
     }
     findAll() {
         return this.blogRepository.find();
@@ -34,39 +35,43 @@ let BlogServerService = class BlogServerService {
     async saveBlog(params) {
         let insertId = '';
         if (params.id) {
-            const user = await (0, typeorm_3.getRepository)(tblBlogList_1.tblBlogList)
+            const user = await this.blogRepository
                 .createQueryBuilder("tblBlogList")
                 .update(tblBlogList_1.tblBlogList)
-                .set({ userId: params.userId,
+                .set({
+                userId: params.userId,
                 abstract: params.abstract,
                 title: params.title,
                 content: params.content,
                 logAdmin: params.logAdmin,
                 logTime: params.logTime,
                 show: params.show,
-                classified: params.classified })
+                classified: params.classified
+            })
                 .where("id=:id", { id: params.id })
                 .execute();
             insertId = params.id;
         }
         else {
-            const user = await (0, typeorm_3.getRepository)(tblBlogList_1.tblBlogList)
+            const user = await this.blogRepository
                 .createQueryBuilder("tblBlogList")
                 .insert()
                 .into(tblBlogList_1.tblBlogList)
                 .values([
-                { userId: params.userId,
+                {
+                    userId: params.userId,
                     abstract: params.abstract,
                     title: params.title,
                     content: params.content,
                     logAdmin: params.logAdmin,
                     logTime: params.logTime,
                     show: params.show,
-                    classified: params.classified },
+                    classified: params.classified
+                },
             ]).execute();
-            insertId = user.raw;
+            insertId = user.identifiers[0].id;
         }
-        var result = {
+        const result = {
             flag: true,
             msg: '保存成功',
             id: insertId,
@@ -74,52 +79,63 @@ let BlogServerService = class BlogServerService {
         return result;
     }
     async getBlogList(params) {
-        const blogList = await (0, typeorm_3.getRepository)(tblBlogList_1.tblBlogList)
+        const blogList = await this.blogRepository
             .createQueryBuilder("tblBlogList")
-            .where("userId = :userId", { userId: params.user.userId })
+            .where('"userId" = :userId', { userId: params.user.userId })
             .getMany();
-        var result = {
+        const result = {
             'flag': true,
             'data': blogList,
         };
         return result;
     }
     async getOneById(params) {
-        const blogList = await (0, typeorm_3.getRepository)(tblBlogList_1.tblBlogList)
+        const blogList = await this.blogRepository
             .createQueryBuilder("tblBlogList")
             .where("id = :id", { id: params.id })
             .getOne();
-        var result = {
+        const result = {
             'flag': true,
             'data': blogList,
         };
         return result;
     }
     async delBlog(parsms) {
-        const user = await (0, typeorm_3.getRepository)(tblBlogList_1.tblBlogList)
+        const user = await this.blogRepository
             .createQueryBuilder("tblBlogList")
             .delete()
             .from(tblBlogList_1.tblBlogList)
             .where("id = :id", { id: parsms.id })
             .execute();
-        var result = {
+        const result = {
             flag: true,
             msg: '删除成功',
         };
         return result;
     }
-    async uploadImg(params) {
-        var result = {
-            flag: true,
-            msg: '上传成功',
-        };
-        return result;
+    async saveImage(params) {
+        const user = await this.imageRepository
+            .createQueryBuilder("tblImage")
+            .insert()
+            .into(tblImage_1.tblImages)
+            .values([
+            {
+                image: params.image,
+            },
+        ]).execute();
+        const insertId = user.identifiers[0].id;
+        return insertId;
+    }
+    async getImage(id) {
+        return (await this.imageRepository.findOne(id)).image;
     }
 };
 BlogServerService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(tblBlogList_1.tblBlogList)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(tblImage_1.tblImages)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], BlogServerService);
 exports.BlogServerService = BlogServerService;
 //# sourceMappingURL=blog-server.service.js.map

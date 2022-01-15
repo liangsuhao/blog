@@ -15,7 +15,7 @@ export class LoginService {
     async findUser(userName: string): Promise<User> {
         const userInfo = await getRepository(User)
         .createQueryBuilder("User")
-        .where("userName = :userName", { userName: userName } )
+        .where('"userName" = :userName', { userName: userName } )
         .getOne();
 
         return userInfo;

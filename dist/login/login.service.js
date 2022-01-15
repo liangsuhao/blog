@@ -32,7 +32,7 @@ let LoginService = class LoginService {
     async findUser(userName) {
         const userInfo = await (0, typeorm_1.getRepository)(user_1.User)
             .createQueryBuilder("User")
-            .where("userName = :userName", { userName: userName })
+            .where('"userName" = :userName', { userName: userName })
             .getOne();
         return userInfo;
     }

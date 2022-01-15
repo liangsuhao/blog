@@ -1,8 +1,14 @@
+/// <reference types="node" />
 import { tblBlogList } from 'src/entity/tblBlogList';
+import { tblImages } from 'src/entity/tblImage';
 import { Repository } from 'typeorm';
+interface ImageParams {
+    image: Buffer;
+}
 export declare class BlogServerService {
     private blogRepository;
-    constructor(blogRepository: Repository<tblBlogList>);
+    private imageRepository;
+    constructor(blogRepository: Repository<tblBlogList>, imageRepository: Repository<tblImages>);
     findAll(): Promise<tblBlogList[]>;
     findOne(id: string): Promise<tblBlogList>;
     remove(id: string): Promise<void>;
@@ -10,5 +16,7 @@ export declare class BlogServerService {
     getBlogList(params: any): Promise<object>;
     getOneById(params: any): Promise<object>;
     delBlog(parsms: any): Promise<object>;
-    uploadImg(params: any): Promise<object>;
+    saveImage(params: ImageParams): Promise<number>;
+    getImage(id: number): Promise<Buffer>;
 }
+export {};
