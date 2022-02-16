@@ -23,7 +23,7 @@ AppModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
-                url: process.env.DATABASE_URL,
+                url: 'postgres://bfuqyzuonbmsns:d61ac3ecf9846114cab1edce8e01266d4a4f7699257d7f43aef52827b9911f42@ec2-34-205-46-149.compute-1.amazonaws.com:5432/demcnvk1heqfqr',
                 entities: [user_1.User, tblBlogList_1.tblBlogList, tblImage_1.tblImages],
                 synchronize: true,
                 ssl: {

@@ -5,10 +5,13 @@
 import axios from '@/request/http';
 import querystring from 'querystring';
 
+// const baseUrl = "http://localhost:3000";
+const baseUrl = "";
+
 const signApi = {
   //登录
   loginin(params){
-    return axios.post('http://localhost:3000/login/loginin',querystring.stringify(params));
+    return axios.post(baseUrl + '/login/loginin',querystring.stringify(params));
   },
   //注册
   signup(params){
