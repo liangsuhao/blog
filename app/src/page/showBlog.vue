@@ -26,7 +26,8 @@ export default {
   methods:{
     getBlog: function(id){
       var data = {id: id};
-      axios.post('http://localhost:3000/blog-server/getOne',data).then((res)=>{
+      // axios.post('http://localhost:3000/blog-server/getOne',data).then((res)=>{
+      this.$api.blogApi.getBlog(data).then((res)=>{
         if(res.data.flag){
           this.title = res.data.data.title;
           this.content = res.data.data.content;
