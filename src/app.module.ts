@@ -14,9 +14,6 @@ import { ActivityModule } from './activity/activity.module';
 
 @Module({
   imports: [
-    // TypeOrmModule.forRoot({
-    //   type: 'sqlite',
-    //   database: './test.db',
     //   // type: 'mysql',
     //   // host: 'localhost',
     //   // port: 3306,
