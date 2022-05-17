@@ -4,7 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import {join} from 'path';
 import { HttpExceptionFilter } from './http-exception.filter';
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3004
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);

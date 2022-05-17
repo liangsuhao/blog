@@ -10,6 +10,7 @@ import { tblImages } from './entity/tblImage';
 import { BlogServerModule } from './blog-server/blog-server.module';
 import { LoginController } from './login/login.controller';
 import { LoginModule } from './login/login.module';
+import { ActivityModule } from './activity/activity.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { LoginModule } from './login/login.module';
     // }),
      TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL,
+      // url: process.env.DATABASE_URL,
+      url: 'postgres://bfuqyzuonbmsns:d61ac3ecf9846114cab1edce8e01266d4a4f7699257d7f43aef52827b9911f42@ec2-34-205-46-149.compute-1.amazonaws.com:5432/demcnvk1heqfqr',
       entities: [User,tblBlogList,tblImages],
       synchronize: true,
       ssl: {
@@ -40,6 +42,7 @@ import { LoginModule } from './login/login.module';
     }),
     BlogServerModule,
     LoginModule,
+    ActivityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
